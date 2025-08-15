@@ -1,14 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\nfseController;
+
+// rota para o formulário de NFSE via controller
+Route::get('/nfse', [nfseController::class, 'index']);
+
+// rota para testar conexão com API da Prefeitura
+Route::get('/nfse/testar-conexao', [nfseController::class, 'testarConexao']);
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/nfse', function () {
-    return view('nfse-form');
-});
+
+
 
 // rota com parâmetro opcional
 Route::get('/nfses_teste/{id?}', function ($id = null) {

@@ -12,6 +12,9 @@
   <!-- CSS Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <!-- CSS da aplicação -->
   <link rel="stylesheet" href="/css/styles.css">
 
@@ -44,17 +47,18 @@
     </nav>
   </header>
 
-
   @yield('content', "Não há conteúdo para exibir")
-
 
   <footer>
     @yield('footer', 'Todos os direitos reservados')
   </footer>
 
-
   <!-- JavaScript Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  <!-- Scripts customizados -->
+  @stack('scripts')
+
 </body>
 
 </html>

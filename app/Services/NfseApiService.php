@@ -159,7 +159,7 @@ class NfseApiService
      */
     public function testConnection()
     {
-        // Primeiro vamos testar apenas uma requisição GET simples
+        // estar apenas uma requisição GET simples
         return $this->makeRequest('', '', 'GET');
     }
 }

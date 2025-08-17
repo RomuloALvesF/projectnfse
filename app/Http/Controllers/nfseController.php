@@ -8,29 +8,19 @@ class NfseController extends Controller
 {
     public function index()
     {
-        // REGRA DE NEGÓCIO BÁSICA
-        $horaAtual = date('H'); // Pega a hora atual (0-23)
-
-        // Regra: Se for antes das 8h ou depois das 18h, mostrar mensagem de horário
-        if ($horaAtual < 9 || $horaAtual >= 22) {
-            $mensagem = "Sistema disponível apenas em horário comercial (9h às 18h)";
-            $sistemaAtivo = false;
-        } else {
-            $mensagem = "Sistema ativo - Horário comercial";
-            $sistemaAtivo = true;
-        }
+        // Usa Service para verificar horário de funcionamento
+        $nfseService = new NfseApiService();
+        $horario = $nfseService->verificarHorarioFuncionamento();
 
         // Passa os dados processados para a view
         return view('nfse-form', [
-            'mensagem' => $mensagem,
-            'sistemaAtivo' => $sistemaAtivo,
-            'horaAtual' => $horaAtual
+            'mensagem' => $horario['mensagem'],
+            'sistemaAtivo' => $horario['ativo'],
+            'horaAtual' => $horario['horaAtual']
         ]);
     }
 
-    /**
-     * Testa a conexão com a API da Prefeitura
-     */
+
     public function testarConexao()
     {
         try {

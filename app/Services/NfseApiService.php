@@ -18,16 +18,14 @@ class NfseApiService
         $this->certificatePath = storage_path('certificates/private/cert.pfx');
         $this->certificatePassword = env('CERTIFICATE_PASSWORD', '182838'); // Senha do certificado
 
-        // URL da API da Prefeitura de BH (você precisa verificar a URL correta)
+        // URL da API da Prefeitura de BH
         $this->baseUrl = env('NFSE_API_URL', 'https://bhissdigital.pbh.gov.br');
 
         // Timeout da conexão
         $this->timeout = 30;
     }
 
-    /**
-     * Verifica se o certificado existe e é válido
-     */
+   //validação certificado
     public function validateCertificate()
     {
         try {
@@ -67,9 +65,7 @@ class NfseApiService
         }
     }
 
-    /**
-     * Faz uma requisição para a API da Prefeitura
-     */
+    //faz uma requisição para a api da prefeitura
     public function makeRequest($endpoint, $xmlData, $method = 'POST')
     {
         try {
@@ -79,7 +75,7 @@ class NfseApiService
                 throw new Exception('Certificado inválido: ' . $certValidation['error']);
             }
 
-            // Configura o cURL
+            // Configura  cURL
             $ch = curl_init();
 
             $url = $this->baseUrl . '/' . $endpoint;
@@ -118,7 +114,7 @@ class NfseApiService
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlData);
             }
 
-            // Faz a requisição
+            // Faz  requisição
             $response = curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $error = curl_error($ch);
@@ -161,5 +157,27 @@ class NfseApiService
     {
         // estar apenas uma requisição GET simples
         return $this->makeRequest('', '', 'GET');
+    }
+
+    /**
+     * Verifica horário de funcionamento do sistema
+     */
+    public function verificarHorarioFuncionamento()
+    {
+        $horaAtual = date('H');
+
+        if ($horaAtual < 9 || $horaAtual >= 22) {
+            return [
+                'ativo' => false,
+                'mensagem' => 'Sistema disponível apenas em horário comercial (9h às 18h)',
+                'horaAtual' => $horaAtual
+            ];
+        }
+
+        return [
+            'ativo' => true,
+            'mensagem' => 'Sistema ativo - Horário comercial',
+            'horaAtual' => $horaAtual
+        ];
     }
 }

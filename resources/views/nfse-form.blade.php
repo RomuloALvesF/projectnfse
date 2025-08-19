@@ -20,7 +20,7 @@
   </div>
 
   @if($sistemaAtivo)
-    <!-- Formulário só aparece se o sistema estiver ativo -->
+    <!-- Formulário vai aparece se o sistema estiver ativo -->
     <div class="form-group">
       <label>Nome do Cliente:</label>
       <input type="text" class="form-control" placeholder="Digite o nome">

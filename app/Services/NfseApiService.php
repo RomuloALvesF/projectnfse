@@ -150,18 +150,14 @@ class NfseApiService
         }
     }
 
-    /**
-     * Testa a conexão com a API
-     */
+   //testa a conexão com a api
     public function testConnection()
     {
         // estar apenas uma requisição GET simples
         return $this->makeRequest('', '', 'GET');
     }
 
-    /**
-     * Verifica horário de funcionamento do sistema
-     */
+    //verifica horario de funcionamento do sistema, necessario??? Verificar
     public function verificarHorarioFuncionamento()
     {
         $horaAtual = date('H');

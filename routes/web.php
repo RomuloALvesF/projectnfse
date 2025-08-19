@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\nfseController;
 
 // rota para o formulário de NFSE via controller
-Route::get('/nfse', [nfseController::class, 'index']);
+Route::get('/nfse', [nfseController::class, 'index'])->name('nfse.form');
 
 // rota para testar conexão com API da Prefeitura
 Route::get('/nfse/testar-conexao', [nfseController::class, 'testarConexao']);
